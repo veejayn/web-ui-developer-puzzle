@@ -16,7 +16,6 @@ import { Book } from '@tmo/shared/models';
   styleUrls: ['./book-search.component.scss']
 })
 export class BookSearchComponent implements OnInit {
-  books: ReadingListBook[];
   books$ = this.store.pipe(select(getAllBooks));
 
   searchForm = this.fb.group({
