@@ -1,3 +1,4 @@
+import { ReadingListItem } from '@tmo/shared/models';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
@@ -12,7 +13,7 @@ export class ReadingListComponent {
 
   constructor(private readonly store: Store) {}
 
-  removeFromReadingList(item) {
+  removeFromReadingList(item: ReadingListItem) {
     this.store.dispatch(removeFromReadingList({ item }));
   }
 }
