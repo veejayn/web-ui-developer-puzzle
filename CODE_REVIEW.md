@@ -24,3 +24,10 @@ Manual Accessibility Check and Fixes:
 4)Label Tag before <input> is missing can be incase for visually impaired, this also comes under accessibility.
 
 - Fixed testcases as its missing few scenarios on reading-list.reducer file.
+
+
+Task 2:
+--> Implemented the instant search by using valuesChanges() over keyup because it is listening to the change to the searchform, basically if the change is
+    either through DOM or programatically it will be noticed.
+
+--> Implemented instant search test case.
