@@ -38,6 +38,28 @@ export class ReadingListEffects implements OnInitEffects {
     )
   );
 
+  /*
+      Effect Added to Mark Book As Read from Reading List which Calls the Update API (PUT).
+  */
+
+  updateReadingBookAsFinished$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ReadingListActions.updateBookAsFinishedReading),
+      concatMap(({ item }) =>
+        this.http.put(`/api/reading-list/${item.bookId}/finished`, item).pipe(
+          map(() => ReadingListActions.confirmedUpdateBookAsFinishedReading()),
+          catchError(() =>
+            of(
+              ReadingListActions.failedUpdateBookAsFinishedReading({
+                item: { ...item, finished: false, finishedDate: '' },
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   removeBook$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ReadingListActions.removeFromReadingList),
