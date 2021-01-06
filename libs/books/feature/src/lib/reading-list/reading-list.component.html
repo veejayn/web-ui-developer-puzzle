@@ -1,19 +1,35 @@
 <ng-container *ngIf="(readingList$ | async).length > 0; else empty">
   <div class="reading-list-item" *ngFor="let b of readingList$ | async">
     <div>
+      <button *ngIf="!b?.finished" data-testing="mark-to-finish-reading-button" mat-icon-button
+        [matTooltip]="'Mark ' + b.title + ' as finished'" color="accent"
+        [attr.aria-label]="'Mark ' + b.title + ' as finished in reading list'"
+        (click)="markAsFinishedReadingFromList(b)">
+        <mat-icon>library_books</mat-icon>
+      </button>
+      <button *ngIf="b?.finished" data-testing="marked-as-finish-reading-button" mat-icon-button
+        [matTooltip]="'Reading Finished'" color="primary" [attr.aria-label]="'Finished Reading ' + b.title + ' book'">
+        <mat-icon>Done</mat-icon>
+      </button>
+    </div>
+    <div>
       <img alt="" class="reading-list-item--cover" [src]="b.coverUrl" />
     </div>
     <div class="reading-list-item--details">
       <strong class="reading-list-item--details--title">{{ b.title }}</strong>
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
+        <div data-testing="finished-reading-details" class="reading-list-finished" *ngIf="b?.finished">Finished reading
+          on
+          {{ (b.finishedDate) | date:'mediumDate' }}</div>
+        <br>
       </div>
     </div>
     <form (ngSubmit)="removeFromReadingList(b)">
       <div>
-        <button mat-icon-button color="warn" [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
-          type="submit">
-          <mat-icon>remove_circle</mat-icon>
+        <button mat-icon-button [matTooltip]="'Remove Book'" data-testing="remove-book-from-readinglist" color="warn"
+          [attr.aria-label]="'Remove ' + b.title + ' from reading list'" type="submit">
+          <mat-icon>delete</mat-icon>
         </button>
       </div>
     </form>
