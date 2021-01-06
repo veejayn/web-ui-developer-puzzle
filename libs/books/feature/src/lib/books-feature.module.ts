@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BooksDataAccessModule } from '@tmo/books/data-access';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +16,7 @@ import { ReadingListComponent } from './reading-list/reading-list.component';
 const EXPORTS = [
   BookSearchComponent,
   TotalCountComponent,
-  ReadingListComponent
+  ReadingListComponent,
 ];
 
 @NgModule({
@@ -25,15 +26,16 @@ const EXPORTS = [
     MatBadgeModule,
     MatIconModule,
     MatInputModule,
+    MatTooltipModule,
     MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: BookSearchComponent }
+      { path: '', pathMatch: 'full', component: BookSearchComponent },
     ]),
-    BooksDataAccessModule
+    BooksDataAccessModule,
   ],
   exports: [...EXPORTS],
-  declarations: [...EXPORTS]
+  declarations: [...EXPORTS],
 })
 export class BooksFeatureModule {}
