@@ -1,3 +1,4 @@
+import { undoAddtoReadingList } from './../../../../data-access/src/lib/+state/reading-list.actions';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
@@ -45,6 +46,7 @@ export class BookSearchComponent implements OnInit {
 
   addBookToReadingList(book: Book) {
     this.store.dispatch(addToReadingList({ book }));
+    this.store.dispatch(undoAddtoReadingList({ book }));
   }
 
   searchExample() {
