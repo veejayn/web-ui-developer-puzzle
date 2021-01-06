@@ -1,3 +1,4 @@
+import { undoRemoveFromReadingList } from './../../../../data-access/src/lib/+state/reading-list.actions';
 import { ReadingListItem } from '@tmo/shared/models';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -15,5 +16,6 @@ export class ReadingListComponent {
 
   removeFromReadingList(item: ReadingListItem) {
     this.store.dispatch(removeFromReadingList({ item }));
+    this.store.dispatch(undoRemoveFromReadingList({ item }));
   }
 }

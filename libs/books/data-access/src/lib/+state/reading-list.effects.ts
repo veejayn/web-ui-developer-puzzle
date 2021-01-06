@@ -55,9 +55,9 @@ export class ReadingListEffects implements OnInitEffects {
     )
   );
 
-  confirmAddReadingListBook$ = createEffect(() =>
+  undoAddtoReadingListBook$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ReadingListActions.confirmedAddToReadingList),
+      ofType(ReadingListActions.undoAddtoReadingList),
       concatMap(({ book }) => {
         return this.snackBarOperation(
           book.title + ' has been added to Reading List.',
@@ -75,9 +75,9 @@ export class ReadingListEffects implements OnInitEffects {
     )
   );
 
-  confirmRemoveReadingListBook$ = createEffect(() =>
+  undoRemoveReadingListBook$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ReadingListActions.confirmedRemoveFromReadingList),
+      ofType(ReadingListActions.undoRemoveFromReadingList),
       concatMap(({ item }) => {
         return this.snackBarOperation(
           item.title + ' has been removed from Reading List.',

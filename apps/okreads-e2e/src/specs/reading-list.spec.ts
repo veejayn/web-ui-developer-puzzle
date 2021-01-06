@@ -19,7 +19,6 @@ describe('When: I use the reading list feature', () => {
   });
 
   it('Then: I should see my reading list and snackbar after adding book to Reading List', async () => {
-    const numberOne = 1;
     await browser.get('/');
     await browser.wait(
       ExpectedConditions.textToBePresentInElement($('tmo-root'), 'okreads')
@@ -29,7 +28,7 @@ describe('When: I use the reading list feature', () => {
     await input.sendKeys('NgRx');
     await form.submit();
     const readingListBooks = await $$('[data-testing="book-item"]');
-    expect(readingListBooks.length).toBeGreaterThan(numberOne);
+    expect(readingListBooks.length).toBeGreaterThan(1);
 
     await $$('.book--content--info button:enabled').first().click();
 
@@ -61,14 +60,11 @@ describe('When: I use the reading list feature', () => {
       '[data-testing="remove-reading-list-button"]'
     );
     await removeFromReadingListButton.click();
-    browser.sleep(2000);
-    await browser
-      .executeScript(
-        "return await document.querySelector('.mat-simple-snackbar-action')"
+    await (
+      await browser.driver.findElement(
+        by.tagName('.mat-simple-snackbar-action')
       )
-      .then((snackBarButton: HTMLElement) => {
-        snackBarButton.click();
-      });
+    ).click();
     readingListitems = await $$('[data-testing="reading-book-list-item"]');
     expect(readingListitems.length).toEqual(readingListitemsLength);
     browser.sleep(2000);
